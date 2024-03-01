@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Buzzword Generator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #2b2f3a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            overflow: auto;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            vertical-align: middle;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #1e2129;
+            color: #ddd;
+            border: 1px solid #555;
+            border-radius: 4px;
+            resize: none;
+            transition: border-color 0.3s;
+        }
+        textarea:focus {
+            border-color: #4caf50;
+            outline: none;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #66bb6a;
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="https://github.com/alenperic" target="_blank">
+                <img src="https://avatars.githubusercontent.com/u/20021065?v=4" alt="GitHub Profile Icon">
+                Cybersecurity Buzzword Generator
+            </a>
+        </div>
+
+        <textarea id="buzzwordOutput" placeholder="Your generated buzzword will appear here..." readonly></textarea>
+        <button onclick="generateBuzzword()">Generate Buzzword</button>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+
+    <script>
+        const buzzwords = [
+            "zero-trust", "post-quantum", "drones", "blockchain", "AI-driven",
+            "machine learning", "deepfake", "IoT", "big data", "cloud-native",
+            "edge computing", "quantum-resistant", "threat intelligence", "wi-fi hacking",
+            "biometric security", "cyber-physical", "smart contract", "5G security",
+            "endpoint protection", "phishing defense", "encryption", "data sovereignty",
+            "identity access management", "vulnerability scanning", "penetration testing",
+            "firewall", "intrusion detection", "SOC automation", "compliance tracking",
+            "ransomware mitigation", "threat hunting", "security orchestration",
+            "incident response", "VPN", "secure coding", "ethical hacking",
+            "digital forensics", "cryptocurrency security", "cloud encryption",
+            "privacy-enhancing technologies", "supply chain attack prevention",
+            "cyber resilience", "DDoS protection", "malware analysis", "security awareness training"
+        ];
+
+        function generateBuzzword() {
+            const selectedCount = Math.floor(Math.random() * 5) + 3; // Generate between 3 to 7 buzzwords
+            const shuffled = buzzwords.sort(() => 0.5 - Math.random());
+            let selected = shuffled.slice(0, selectedCount).join(' - ');
+            let outputElement = document.getElementById('buzzwordOutput');
+            outputElement.value = selected;
+            outputElement.classList.remove('fade-in');
+            void outputElement.offsetWidth; // trigger reflow
+            outputElement.classList.add('fade-in');
+        }
+
+        function copyToClipboard() {
+            var outputText = document.getElementById('buzzwordOutput');
+            outputText.select();
+            navigator.clipboard.writeText(outputText.value)
+                .then(() => alert('Copied to clipboard!'))
+                .catch((err) => console.error('Error in copying text: ', err));
+        }
+    </script>
+</body>
+</html>
